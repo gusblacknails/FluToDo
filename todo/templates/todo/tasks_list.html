@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% load static %} {% block title %}FluToDo{% endblock %}
+{% block content%}
+<a href="{% url 'logout' %}">Logout</a>
+<li>
+    {%for task in tasks_list%} 
+    <ul>{{task.task_name}}</ul>
+    {%empty%}
+    <span>No tasks to complete</span>
+    {%endfor%}
+</li>
+
+{% endblock %}

@@ -1,13 +1,15 @@
-# How run FluToDo
+# How to run FluToDo
 
-# up virtualevn
+# Activate virtualevn
 ```source venv/bin/activate```
 
-# Run Docker
+# Boot Docker
 ```docker-compose up```
 
 # Migrate models
 ```docker-compose exec web python manage.py makemigrations```
 
 ```docker-compose exec web python manage.py migrate```
+
+
 

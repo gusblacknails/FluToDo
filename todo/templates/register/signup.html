@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% load static %} 
+{% block content%}
+
+<div class='contentBox' >
+
+
+     <form class="formBox" id="signUpForm" method="post" class="sign__form">
+        {% csrf_token %}
+        <div class="signUpFormFieldsBox">
+            <h3 class="createAcountCopy">Create your free account</h3>
+            <div class="signUpGroup">
+              <input
+                name="username"
+                maxlength="150"
+                id="id_username"
+                required
+                type="text"
+                class="sign__input"
+                placeholder="Choose a username"
+              />
+              {{ form.username.errors.as_text }}
+            </div>
+    
+            <div class="signUpGroup">
+              <input
+                required
+                type="email"
+                name="email"
+                id="email"
+                class="sign__input"
+                placeholder="Email"
+              />
+              {{ form.email.errors.as_text }}
+            </div>
+    
+            <div class="signUpGroup">
+              <input
+                type="password"
+                name="password1"
+                id="id_password1"
+                class="sign__input"
+                placeholder="Choose a password"
+              />
+              {{ form.password1.errors.as_text }}
+            </div>
+    
+            <div class="signUpGroup">
+              <input
+                type="password"
+                name="password2"
+                id="id_password2"
+                class="sign__input"
+                placeholder="Repeat the password"
+              />
+              {{ form.password2.errors.as_text }}
+            </div>
+    
+            <!-- <div class="">
+              {{ form.non_field_errors.as_text }}
+            </div> -->
+    
+        </div>
+        
+        <button class="signUpButton" type="submit">Create account</button>
+    
+        <div class="loginButtonBox">
+            <h3 class="createAcountCopy">or</h3>
+            <a class = "signUpButton" href= "{% url 'login' %}" >Login</a>
+            <h3 class="createAcountCopy">if you already have an account</h3>
+            
+        </div> 
+
+</div>
+
+{% endblock %}

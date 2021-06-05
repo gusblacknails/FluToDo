@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% load static %} 
+{% block content%}
+
+<div class='contentBox' >
+    <h3 class="createAcountCopy">Access to your tasks list</h3>
+
+    <form class="formBox" method='POST'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type='submit' value="Login" >
+    </form>
+    <div class="signUpButtonBox">
+        <h3 class="createAcountCopy" >or</h3 >
+        <a class = "signUpButton" href= "{% url 'signup' %}" >Sign Up</a>
+        <h3 class="createAcountCopy">if you don't have an account</h3 >
+        
+    </div>
+    
+
+</div>
+
+{% endblock %}
