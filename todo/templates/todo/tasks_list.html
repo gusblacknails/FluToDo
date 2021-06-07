@@ -1,12 +1,53 @@
 {% extends 'base.html' %} {% load static %} {% block title %}FluToDo{% endblock %}
 {% block content%}
 <a href="{% url 'logout' %}">Logout</a>
-<li>
-    {%for task in tasks_list%} 
-    <ul>{{task.task_name}}</ul>
+
+    
+
+<table class="styled-table">
+    <tr>
+      <th>Name</th>
+      <th>IsComplete</th>
+      <th>Change State</th>
+      <th>Delete</th>
+    </tr>
+    {%for task in tasks_list%}
+    <tr>
+        <td>{{task.task_name}}</td>
+        <td id="toggleTd">{% if task.is_completed %}<img src="/static/admin/img/icon-yes.svg" alt="True"> </i>{%else%} <img src="/static/admin/img/icon-no.svg" alt="False"> {%endif%}
+        </td>
+          <td >
+
+           <form id="form_{{task.id}}" method="POST">
+                {% csrf_token %}
+                <label class="switch">
+                    <input type='hidden' value='{{task.pk}}' name='id'>
+                    <input id="{{task.id}}" name="input" type="checkbox" value={{task.is_completed}} onchange="toggleState(this)">
+                    <span class="slider round"></span>
+                </label>
+            </form>
+        </td>
+        <td>
+          <form id="form_{{task.id}}" method="GET" action="{% url 'delete' pk=task.pk %}" >
+            {% csrf_token %}
+            <input id="deleteIcon" type="image" name="submit" src="/static/delete.svg"> 
+           
+          </form>
+        </td>
+      </tr> 
+   
     {%empty%}
     <span>No tasks to complete</span>
     {%endfor%}
-</li>
+    
+    
+  </table>
 
+  <script type="text/javascript">  
+   function toggleState(item){
+        document.getElementById(`form_${item.id}`).submit();
+   }
+
+        
+</script>
 {% endblock %}
