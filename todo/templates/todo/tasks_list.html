@@ -12,22 +12,25 @@
       <th>Delete</th>
     </tr>
     {%for task in tasks_list%}
-    <tr>
-        <td>{{task.task_name}}</td>
-        <td id="toggleTd">{% if task.is_completed %}<img src="/static/admin/img/icon-yes.svg" alt="True"> </i>{%else%} <img src="/static/admin/img/icon-no.svg" alt="False"> {%endif%}
+    <tr >
+        <td  >{{task.task_name}}</td>
+        <td  class="alignTd" id="iconScaleUp" >{% if task.is_completed %}<img src="/static/admin/img/icon-yes.svg" alt="True"> </i>{%else%} <img src="/static/admin/img/icon-no.svg" alt="False"> {%endif%}
         </td>
           <td >
 
            <form id="form_{{task.id}}" method="POST">
                 {% csrf_token %}
-                <label class="switch">
-                    <input type='hidden' value='{{task.pk}}' name='id'>
+                <label class="switch ">
+                  <input type='hidden' value='{{task.pk}}' name='id'>
                     <input id="{{task.id}}" name="input" type="checkbox" value={{task.is_completed}} onchange="toggleState(this)">
-                    <span class="slider round"></span>
+                    
+                    <span  class="slider round"></span>
                 </label>
             </form>
         </td>
-        <td>
+        <td  style="
+        width: 5%;
+    ">
           <form id="form_{{task.id}}" method="GET" action="{% url 'delete' pk=task.pk %}" >
             {% csrf_token %}
             <input id="deleteIcon" type="image" name="submit" src="/static/delete.svg"> 

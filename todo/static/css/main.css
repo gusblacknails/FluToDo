@@ -136,6 +136,7 @@ input[type="submit"]:hover,
     font-family: sans-serif;
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
 }
 
 .styled-table thead tr {
@@ -144,11 +145,19 @@ input[type="submit"]:hover,
     text-align: left;
 }
 
- #toggleTd{
+ /* .alignTd{
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: scale(2.5);
+    
+} */
+#iconScaleUp{
+  transform: scale(2.5);
+}
+tr, th{
+  display: flex;
+  justify-content: space-between;
+    align-items: center;
 }
 
 .styled-table th,
@@ -234,6 +243,7 @@ input[type="submit"]:hover,
   }
 
   #deleteIcon {
-      transform: scale(0.7);
+      /* transform: scale(0.7); */
+      
       cursor: pointer;
   }

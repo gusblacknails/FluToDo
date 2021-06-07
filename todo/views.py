@@ -42,8 +42,8 @@ class TaskListView(LoginRequiredMixin, ListView):
 
 class TaskDeleteView(DeleteView):
     model = Tasks
-    success_url = reverse_lazy('todo/tasks_list.html')
-
+    # success_url = reverse_lazy('todo/tasks_list.html')
+    success_url = "/"
 def new_user(request):
     # Creamos el formulario de autenticación vacío
     form = NewUserForm()
