@@ -1,3 +1,7 @@
+body{
+  height: 2000px;
+}
+
 .mainBox {
   width: 100%;
   height: 100%;
@@ -12,11 +16,13 @@
     rgba(6, 251, 155, 1) 73%,
     rgba(112, 100, 100, 1) 100%
   );
+  position: relative;
+  bottom: 553px;
 }
 .todoBox {
   padding: 2rem;
   width: 70%;
-  height: 70%;
+  /* height: 70%; */
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -87,17 +93,17 @@ input[type="submit"]:hover,
 }
 
 /* Sign Up */
-.signUpButtonBox, .loginButtonBox {
-  
+.signUpButtonBox,
+.loginButtonBox {
   color: white;
   margin: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.signUpButtonBox{
-    position: relative;
-    top: 2.4rem;
+.signUpButtonBox {
+  position: relative;
+  top: 2.4rem;
 }
 .signUpButton {
   text-decoration: none;
@@ -126,124 +132,137 @@ input[type="submit"]:hover,
   color: black;
 }
 
-
 /* table */
 
 .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 1rem;
+  font-family: monospace;
+  font-weight: bold;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
 }
 
 .styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
 }
 
- /* .alignTd{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-} */
-#iconScaleUp{
+#iconScaleUp {
   transform: scale(2.5);
-}
-tr, th{
-  display: flex;
-  justify-content: space-between;
-    align-items: center;
 }
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+  padding: 12px 15px;
 }
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+  background-color: #f3f3f36b;
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #009879;
 }
 .styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: #009879;
+  font-weight: bold;
+  color: #009879;
 }
+
+td {
+  text-align: center;
+}
+#isCompleteCell {
+  transform: scale(2.5);
+}
+
+tr {
+  overflow: hidden;
+  height: 14px;
+  white-space: nowrap;
+}
+.tableFormWrapper {
+  height: 2rem;
+}
+
 
 /* table toggle switch */
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-  
-  .switch input { 
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    transform: scale(0.7);
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #61eada;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #61eada;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
-  #deleteIcon {
-      /* transform: scale(0.7); */
-      
-      cursor: pointer;
-  }
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  transform: scale(0.7);
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #61eada;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #61eada;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#deleteIcon {
+  cursor: pointer;
+  transform: scale(0.4);
+}
+
+.deleteForm {
+  position: relative;
+  bottom: 1rem;
+}

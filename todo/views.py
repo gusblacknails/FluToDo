@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic.list import ListView
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, CreateView
 
 from .models import Tasks
-from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
@@ -19,6 +18,13 @@ class FluTodoLoginView(LoginView):
     fields = '__all__'
     redirect_authenticated_user = True
 
+# class TaskCreateView(CreateView):
+#     model = Tasks
+#     fields = ['task_name', 'is_completed']
+#     success_url = "/"
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super(TaskCreateView, self).form_valid(form)
 
 class TaskListView(LoginRequiredMixin, ListView):
     model = Tasks
@@ -26,10 +32,20 @@ class TaskListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user)
+    def create_task( self, request, task_name):
+            new_task = self.model.objects.create(task_name=task_name, user=self.request.user)
+            new_task.save()
+            context = { "tasks_list": self.model.objects.filter(user=self.request.user) }
+            return render(request, 'todo/tasks_list.html', context)
 
     def post(self, request):
         input_value = request.POST.get('input')
         input_id = request.POST.get('id')
+        
+        task_name = request.POST.get('taskName')
+        print("*"*50 ,task_name, "*"*50)
+        if task_name:
+            self.create_task(request,task_name)
         current_object = self.model.objects.get(
             id=input_id)
         if input_value == "True":
@@ -37,13 +53,15 @@ class TaskListView(LoginRequiredMixin, ListView):
         else:
             current_object.is_completed = True
         current_object.save()
+       
         context = { "tasks_list": self.model.objects.filter(user=self.request.user) }
         return render(request, 'todo/tasks_list.html', context)
+    
 
 class TaskDeleteView(DeleteView):
     model = Tasks
-    # success_url = reverse_lazy('todo/tasks_list.html')
     success_url = "/"
+
 def new_user(request):
     # Creamos el formulario de autenticación vacío
     form = NewUserForm()

@@ -4,6 +4,16 @@
 
     
 
+<div class="tableFormWrapper">
+  <form class="" id="createTaskForm" method="POST"  >
+    {% csrf_token %}
+    <label for="taskName">Add Task:</label>
+    <input type="text" id="taskName" name="taskName" >
+    <input type="submit" value="Submit">
+
+  </form>
+</div>
+
 <table class="styled-table">
     <tr>
       <th>Name</th>
@@ -14,28 +24,32 @@
     {%for task in tasks_list%}
     <tr >
         <td  >{{task.task_name}}</td>
-        <td  class="alignTd" id="iconScaleUp" >{% if task.is_completed %}<img src="/static/admin/img/icon-yes.svg" alt="True"> </i>{%else%} <img src="/static/admin/img/icon-no.svg" alt="False"> {%endif%}
-        </td>
-          <td >
-
-           <form id="form_{{task.id}}" method="POST">
-                {% csrf_token %}
-                <label class="switch ">
+        <td  >{% if task.is_completed %}<img id="isCompleteCell" src="/static/admin/img/icon-yes.svg" alt="True"> </i>{%else%} <img id="isCompleteCell" src="/static/admin/img/icon-no.svg" alt="False"> {%endif%}
+        </td>  
+        <td>
+          <div class="tableFormWrapper">
+            <form id="form_{{task.id}}" method="POST">
+              {% csrf_token %}
+              <label class="switch">
+                
                   <input type='hidden' value='{{task.pk}}' name='id'>
-                    <input id="{{task.id}}" name="input" type="checkbox" value={{task.is_completed}} onchange="toggleState(this)">
-                    
-                    <span  class="slider round"></span>
-                </label>
+                  <input id="{{task.id}}" name="input" type="checkbox" value={{task.is_completed}} onchange="toggleState(this)">
+                  <span class="slider round"></span>
+          
+              </label>
             </form>
+          </div>
+          
+         
         </td>
-        <td  style="
-        width: 5%;
-    ">
-          <form id="form_{{task.id}}" method="GET" action="{% url 'delete' pk=task.pk %}" >
-            {% csrf_token %}
-            <input id="deleteIcon" type="image" name="submit" src="/static/delete.svg"> 
-           
-          </form>
+     
+        <td >
+          <div class="tableFormWrapper">
+            <form class="deleteForm" id="form_{{task.id}}" method="GET" action="{% url 'delete' pk=task.pk %}" >
+              {% csrf_token %}
+              <input id="deleteIcon" type="image" name="submit" src="/static/delete.svg"> 
+            </form>
+          </div>
         </td>
       </tr> 
    
@@ -46,11 +60,10 @@
     
   </table>
 
-  <script type="text/javascript">  
+<script type="text/javascript">  
    function toggleState(item){
         document.getElementById(`form_${item.id}`).submit();
    }
-
         
 </script>
 {% endblock %}
