@@ -1,5 +1,7 @@
-body{
-  height: 2000px;
+body {
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
 }
 
 .mainBox {
@@ -17,12 +19,13 @@ body{
     rgba(112, 100, 100, 1) 100%
   );
   position: relative;
-  bottom: 553px;
+  /* bottom: 553px; */
 }
 .todoBox {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
   padding: 2rem;
   width: 70%;
-  /* height: 70%; */
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -76,6 +79,7 @@ input {
   border-color: transparent;
 }
 input[type="submit"],
+button,
 .signUpButton {
   font-weight: bold;
   color: white;
@@ -85,6 +89,9 @@ input[type="submit"],
   cursor: pointer;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+}
+.noDeleteButton {
+  text-decoration: none;
 }
 
 input[type="submit"]:hover,
@@ -149,7 +156,7 @@ input[type="submit"]:hover,
 }
 
 .styled-table thead tr {
-  background-color: #009879;
+  background-color: #ffffff;
   color: #ffffff;
   text-align: left;
 }
@@ -170,12 +177,9 @@ input[type="submit"]:hover,
   background-color: #f3f3f36b;
 }
 
-.styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
-}
 .styled-table tbody tr.active-row {
   font-weight: bold;
-  color: #009879;
+  color: #ffffff;
 }
 
 td {
@@ -193,7 +197,6 @@ tr {
 .tableFormWrapper {
   height: 2rem;
 }
-
 
 /* table toggle switch */
 .switch {
@@ -258,11 +261,45 @@ input:checked + .slider:before {
 }
 
 #deleteIcon {
+  position: relative;
   cursor: pointer;
-  transform: scale(0.4);
+  max-width: 32px;
+  top: 19px;
 }
 
 .deleteForm {
   position: relative;
   bottom: 1rem;
+}
+
+#taskDeleteForm {
+  display: flex;
+  justify-content: center;
+
+}
+#taskDeleteButtons{
+  text-align: center;
+}
+
+.noDeleteButton:hover{
+  color:#61eada
+}
+
+#existingTask{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#addTaskBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  
+}
+#createTaskForm{
+  width:60%;
+}
+#taskName{
+  width: 70%;
 }

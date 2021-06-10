@@ -1,9 +1,16 @@
 {% extends 'base.html' %} {% load static %} {% block title %}FluToDo{% endblock %}
 {% block content%}
-<form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
-    <button href="/">In another moment</button>
-</form>
+<div id="taskDeleteForm">
+    <form method="post">{% csrf_token %}
+        <p>Are you sure you want to delete <b>"{{ object }}"</b>?</p>
+        <div id="taskDeleteButtons">
+            <input type="submit" value="Confirm">
+            <button  ><a class = "noDeleteButton" href="/">No, thanks</a></button>
+        </div>
+       
+    </form>
+   
+
+</div>
 
 {% endblock %}

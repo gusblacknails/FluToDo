@@ -26,46 +26,58 @@ class FluTodoLoginView(LoginView):
 #         form.instance.user = self.request.user
 #         return super(TaskCreateView, self).form_valid(form)
 
+
 class TaskListView(LoginRequiredMixin, ListView):
     model = Tasks
     context_object_name = "tasks_list"
 
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user)
-    def create_task( self, request, task_name):
-            new_task = self.model.objects.create(task_name=task_name, user=self.request.user)
-            new_task.save()
-            context = { "tasks_list": self.model.objects.filter(user=self.request.user) }
-            return render(request, 'todo/tasks_list.html', context)
+
+    def create_task(self, request, task_name):
+        new_task = self.model.objects.create(
+            task_name=task_name, user=self.request.user)
+        new_task.save()
+        context = {"tasks_list": self.model.objects.filter(
+            user=self.request.user)}
+        return render(request, 'todo/tasks_list.html', context)
 
     def post(self, request):
-        input_value = request.POST.get('input')
-        input_id = request.POST.get('id')
-        
-        task_name = request.POST.get('taskName')
-        print("*"*50 ,task_name, "*"*50)
-        if task_name:
-            self.create_task(request,task_name)
-        current_object = self.model.objects.get(
-            id=input_id)
-        if input_value == "True":
-            current_object.is_completed = False
-        else:
-            current_object.is_completed = True
-        current_object.save()
-       
-        context = { "tasks_list": self.model.objects.filter(user=self.request.user) }
+        if request.POST.get('id'):
+            input_value = request.POST.get('input')
+            input_id = request.POST.get('id')
+            current_object = self.model.objects.get(
+                id=input_id)
+
+            if input_value == "True":
+                current_object.is_completed = False
+            else:
+                current_object.is_completed = True
+            current_object.save()
+        if request.POST.get('taskName'):
+            task_name = request.POST.get('taskName')
+            if not self.model.objects.filter(task_name=task_name, user=self.request.user).exists():
+                print("*"*50, task_name, "*"*50)
+                self.create_task(request, task_name)
+            else:
+                context = {"tasks_list": self.model.objects.filter(
+                    user=self.request.user), "already_exists": True}
+                return render(request, 'todo/tasks_list.html', context)
+
+        context = {"tasks_list": self.model.objects.filter(
+            user=self.request.user)}
         return render(request, 'todo/tasks_list.html', context)
-    
+
 
 class TaskDeleteView(DeleteView):
     model = Tasks
     success_url = "/"
 
+
 def new_user(request):
     # Creamos el formulario de autenticación vacío
     form = NewUserForm()
-  
+
     def unused_email(email):
         if User.objects.filter(email=email).exists():
             return False
