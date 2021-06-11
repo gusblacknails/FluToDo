@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tasks
+from .models import Task
 # Register your models here.
 
 
@@ -9,7 +9,7 @@ class TasksAdmin(admin.ModelAdmin):
     list_filter = ['is_completed']
 
     class Meta:
-        model = Tasks
+        model = Task
 
 
-admin.site.register(Tasks, TasksAdmin)
+admin.site.register(Task, TasksAdmin)

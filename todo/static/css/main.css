@@ -19,13 +19,13 @@ body {
     rgba(112, 100, 100, 1) 100%
   );
   position: relative;
-  /* bottom: 553px; */
 }
 .todoBox {
   margin-top: 6rem;
   margin-bottom: 6rem;
   padding: 2rem;
   width: 70%;
+  height: fit-content;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -275,31 +275,59 @@ input:checked + .slider:before {
 #taskDeleteForm {
   display: flex;
   justify-content: center;
-
 }
-#taskDeleteButtons{
+#taskDeleteButtons {
   text-align: center;
 }
 
-.noDeleteButton:hover{
-  color:#61eada
+.noDeleteButton:hover {
+  color: #61eada;
 }
 
-#existingTask{
-  font-family: Arial, Helvetica, sans-serif;
+#existingTask {
+  bottom: 0.5rem;
+  font-family: monospace;
+  position: relative;
 }
 
-#addTaskBox{
+#addTaskBox {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 1rem;
-  
 }
-#createTaskForm{
-  width:60%;
+#createTaskForm {
+  width: 60%;
+  text-align: center;
 }
-#taskName{
+#taskName {
   width: 70%;
+}
+
+/* user */
+#userLogBox {
+  width: 111vh;
+  text-align: right;
+}
+
+#userName,
+#logout {
+  color: #ffffff;
+  font-size: larger;
+  font-family: sans-serif;
+  font-weight: 500;
+}
+#userIcon {
+  position: relative;
+  top: 5px;
+  right: 3px;
+}
+
+#logout {
+  margin-left: 1rem;
+  text-decoration: none;
+}
+#logout:hover {
+  color: #61eada;
 }

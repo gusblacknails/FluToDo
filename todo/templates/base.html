@@ -14,35 +14,16 @@
 </head>
 <body>
    
-    <div class="mainBox">
-        <div class=todoBox>
+    <div class='mainBox'>
+        <div class='todoBox'>
             <div class='mainTitle'>
                 <h1>FluToDo</h1>
                 {% if user.is_authenticated %}
-                <!-- dropdown -->
-                <div class="dropdown header__lang">
-                  <a
-                    class="dropdown-toggle header__nav-link"
-                    href="#"
-                    role="button"
-                    id="dropdownMenuLang"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    ><i class="set_main_color fa fa-user-o"></i>
-                    <span>{{ user.username }}</span></a
-                  >
-
-                  <ul
-                    class="dropdown-menu header__dropdown-menu"
-                    aria-labelledby="dropdownMenuLang"
-                  >
-                    <li><a href="{% url 'logout'%}">Logout</a></li>
-                  </ul>
+                <div id='userLogBox'>
+                    <span id='userName'><img id="userIcon" src="/static/user.svg" alt="UserIcon">{{ user.username }}</span>
+                    <a id="logout" href="{% url 'logout'%}">Logout</a>
                 </div>
-                <!-- end dropdown -->
-
-               
+        
                 {% endif %}
             </div>
             

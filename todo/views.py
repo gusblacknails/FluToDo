@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic.list import ListView
 from django.views.generic.edit import DeleteView, CreateView
 
-from .models import Tasks
+from .models import Task
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
@@ -18,17 +18,8 @@ class FluTodoLoginView(LoginView):
     fields = '__all__'
     redirect_authenticated_user = True
 
-# class TaskCreateView(CreateView):
-#     model = Tasks
-#     fields = ['task_name', 'is_completed']
-#     success_url = "/"
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super(TaskCreateView, self).form_valid(form)
-
-
 class TaskListView(LoginRequiredMixin, ListView):
-    model = Tasks
+    model = Task
     context_object_name = "tasks_list"
 
     def get_queryset(self):
@@ -70,7 +61,7 @@ class TaskListView(LoginRequiredMixin, ListView):
 
 
 class TaskDeleteView(DeleteView):
-    model = Tasks
+    model = Task
     success_url = "/"
 
 
