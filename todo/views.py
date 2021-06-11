@@ -31,7 +31,7 @@ class TaskListView(LoginRequiredMixin, ListView):
         new_task.save()
         context = {"tasks_list": self.model.objects.filter(
             user=self.request.user)}
-        return render(request, 'todo/tasks_list.html', context)
+        return render(request, 'todo/task_list.html', context)
 
     def post(self, request):
         if request.POST.get('id'):
@@ -53,11 +53,11 @@ class TaskListView(LoginRequiredMixin, ListView):
             else:
                 context = {"tasks_list": self.model.objects.filter(
                     user=self.request.user), "already_exists": True}
-                return render(request, 'todo/tasks_list.html', context)
+                return render(request, 'todo/task_list.html', context)
 
         context = {"tasks_list": self.model.objects.filter(
             user=self.request.user)}
-        return render(request, 'todo/tasks_list.html', context)
+        return render(request, 'todo/task_list.html', context)
 
 
 class TaskDeleteView(DeleteView):
