@@ -5,10 +5,10 @@ from rest_framework import generics, permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
 from knox.models import AuthToken
-from .serializers import TaskSerializer, UserSerializer, RegisterSerializer
+from .serializers import TaskSerializer, UserSerializer, RegisterSerializer, TaskUpdateStateSerializer
 from todo.models import Task
 
-# login / logout
+# login 
 
 from knox.views import LoginView as KnoxLoginView
 
@@ -38,22 +38,30 @@ class CreateUserAPI(generics.GenericAPIView):
         "user": UserSerializer(user, context=self.get_serializer_context()).data,
         "token": AuthToken.objects.create(user)[1]
         })
+
+
 # crud
 
-
 class TaskCreateApi(generics.CreateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
 
 class TaskApi(generics.ListAPIView):
-    # queryset = Task.objects.filter(user=self.request.user)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = TaskSerializer
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)
 
 
 
-class EmployeeUpdateApi(generics.RetrieveUpdateAPIView):
+class TaskUpdateApi(generics.UpdateAPIView):
     queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+    serializer_class = TaskUpdateStateSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+class TaskDeleteApi(generics.DestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskUpdateStateSerializer
+    permission_classes = (permissions.IsAuthenticated,)
