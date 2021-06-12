@@ -58,3 +58,6 @@ Store the task **id** for update and delete operations
 ```curl -X DELETE "http://127.0.0.1:8000/api/delete/{TASK_ID}" -H "Authorization: Token 426d8b8a5337a3d6fbfb75f7c12f7206a9141679ccea39500dff0f2a4e6aec78"```
 
 
+# Run Tests
+
+```docker-compose exec web python manage.py test ```

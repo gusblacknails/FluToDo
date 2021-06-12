@@ -9,7 +9,7 @@ from django.contrib.auth.views import LogoutView as UserLogout
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    path('', TaskListView.as_view(), name='task'),
+    path('', TaskListView.as_view(), name='home'),
     path('<int:pk>/delete/', TaskDeleteView.as_view(), name='delete'),
     path('login/', FluTodoLoginView.as_view(), name='login'),
     path('logout/', UserLogout.as_view(next_page='login'), name='logout'),
@@ -17,7 +17,7 @@ urlpatterns = [
 
     # API
 
-    path('api/',TaskApi.as_view()),
+    path('api/',TaskApi.as_view(), name='api_home'),
     path('api/create/',TaskCreateApi.as_view(), name='create'),
     path('api/delete/<int:pk>',TaskDeleteApi.as_view(), name='create'),
     path('api/update/<int:pk>',TaskUpdateApi.as_view(), name='update'),
