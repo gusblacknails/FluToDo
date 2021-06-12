@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse, resolve
 from django.contrib.auth.views import LogoutView as UserLogout
 from rest_framework.test import APIRequestFactory, force_authenticate, APIClient
@@ -7,15 +7,19 @@ from .api.views import LoginAPI, TaskCreateApi, TaskApi, CreateUserAPI, TaskUpda
 from django.contrib.auth.models import User
 from .models import Task
 import json
+
+
+
+
 # URL's
 class TestTaskListUrlWithoutLogin(TestCase):
-        def test_task_list_page_status_code(self):
-            response = self.client.get('/')
-            self.assertEqual(response.status_code, 302)
+    def test_task_list_page_status_code(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 302)
 
-        def test_task_list_page_response(self):
-            response = self.client.get(reverse('home'))
-            self.assertEqual(response.status_code, 302)
+    def test_task_list_page_response(self):
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 302)
 
 
 class TestTaskListUrl(TestCase):
@@ -36,6 +40,8 @@ class TestTaskListUrl(TestCase):
     def test_task_list_page_response(self):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
+    
+
 
 class TestLoginUrl(TestCase):
    
@@ -172,7 +178,7 @@ class UserTestCase(TestCase):
         response = client.post('/api/logout/')
         self.assertEqual(response.status_code, 204)
     
-    
+
 
     
 
