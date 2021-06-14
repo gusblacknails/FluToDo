@@ -2,22 +2,20 @@
 
 
 
-# Boot Docker
+## Boot Docker
 ```docker-compose up```
 
-# Install requirements
+## Install requirements
 ```docker-compose exec web pip3 install -r requirements.txt```
 
-# Migrate models
+## Migrate models
 ```docker-compose exec web python manage.py makemigrations```
 
 ```docker-compose exec web python manage.py migrate```
 
-# Activate virtualevn 
-```source venv/bin/activate```
+## Create superuser for django-admin
+```docker-compose exec web python manage.py createsuperuser```
 
-# Migrate django-rest-knox models
-```python manage.py migrate```
 
 # API endpoints on localhost
 
